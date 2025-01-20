@@ -1,0 +1,7 @@
+# Ignore IDE files
+.pio
+.idea
+.vscode
+
+# Ignore secure files
+Secure.h
