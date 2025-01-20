@@ -1,10 +1,11 @@
-#include "Arduino.h"
 #include <WiFi.h>
 #include "time.h"
-#include "esp_sntp.h"
 #include "Secure.h"
 #include "CronAlarms.h"
-#include "TimeHandler.h"
+
+const char *time_zone = "EST5EDT,M3.2.0,M11.1.0"; // Time zone string
+static const char *ntpServer1 = "pool.ntp.org";
+static const char *ntpServer2 = "time.nist.gov";
 
 void Test()
 {
@@ -17,19 +18,31 @@ void setup()
 
   Serial.println("Starting setup...");
 
-  // Connect to Wi-Fi
+ // Connect to Wi-Fi
   WiFi.begin(ssid, password);
   Serial.println("Connecting to Wi-Fi...");
-  while (WiFi.status() != WL_CONNECTED)
-  {
+  while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
   Serial.println("\nConnected to Wi-Fi!");
 
-  // Initialize TimeHandler
-  TimeHandler::init("America/New_York");
+  // Set the time zone and configure NTP
+  configTzTime(time_zone, ntpServer1, ntpServer2);
 
+  Serial.println("Waiting for time synchronization...");
+  struct tm timeinfo;
+  while (!getLocalTime(&timeinfo)) {
+    Serial.print(".");
+    delay(1000);
+  }
+
+  Serial.println("\nTime synchronized!");
+
+  // Print the current time
+  Serial.print("Current time: ");
+  Serial.println(&timeinfo, "%A, %B %d %Y %H:%M:%S");
+  
   //Cron.create("*/5 * * * * *", Test, false);   
   Cron.create("0 30 17 * * *", Test, false);
 
