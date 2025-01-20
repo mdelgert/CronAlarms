@@ -1,3 +1,7 @@
+Forked from [CronAlarms](https://github.com/Martin-Laclaustra/CronAlarms)
+
+Updated compile warnings and examples.
+
 CronAlarms
 ==========
 Using expressions suitable for the program cron (crontab syntax), the library allows performing tasks at specific times or after specific intervals.
