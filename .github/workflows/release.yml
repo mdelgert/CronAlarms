@@ -1,4 +1,4 @@
-name: Update Main Branch
+name: Update Master Branch
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  update-main:
+  update-master:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,7 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-      - name: Update Main Branch
+      - name: Update Master Branch
         run: |
           set -e  # Exit on any error
 
@@ -48,11 +48,11 @@ jobs:
 
           echo "Staging and committing changes..."
           git add .
-          git commit -m "Update main branch from dev" || echo "No changes to commit"
+          git commit -m "Update master branch from dev" || echo "No changes to commit"
 
-          echo "Force-pushing dev to main branch..."
-          git push origin dev:main --force
+          echo "Force-pushing dev to master branch..."
+          git push origin dev:master --force
 
-          echo "Fetching and verifying main branch..."
-          git fetch origin main
-          git log origin/main -n 1
+          echo "Fetching and verifying master branch..."
+          git fetch origin master
+          git log origin/master -n 1
