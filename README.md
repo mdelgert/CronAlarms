@@ -1,7 +1,3 @@
-Forked from [CronAlarms](https://github.com/Martin-Laclaustra/CronAlarms)
-
-Updated compile warnings and examples.
-
 CronAlarms
 ==========
 Using expressions suitable for the program cron (crontab syntax), the library allows performing tasks at specific times or after specific intervals.
@@ -60,8 +56,6 @@ Other low level functions:
 - disable( ID);  -  prevent the alarm associated with the given ID from triggering   
 - enable(ID);  -  enable the alarm 
 - getTriggeredAlarmId();   -  returns the currently triggered  alarm id, only valid in an alarm callback
-
-- globalUpdateNextTrigger(), globalenable(), and globaldisable() - can be used to temporarily suspend activity during timesetting or time zone change
 
 FAQ
 ---
